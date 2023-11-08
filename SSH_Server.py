@@ -1,5 +1,6 @@
 from socket import socket, AF_INET, SOCK_STREAM
 
+
 # Funkcja do uruchamiania prostego serwera na określonym porcie
 def ssh_server(port_number):
     # Otwórz plik dziennika w trybie dopisywania
