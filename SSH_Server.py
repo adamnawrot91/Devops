@@ -1,57 +1,56 @@
 from socket import socket, AF_INET, SOCK_STREAM
 
 
-# Funkcja do uruchamiania prostego serwera na określonym porcie
+# SSH Server function
 def ssh_server(port_number):
-    # Otwórz plik dziennika w trybie dopisywania
+    # Create log file
     with open("server_log.txt", "a") as log_file:
-        # Utwórz gniazdo
+        # Create socket
         server_socket = socket(AF_INET, SOCK_STREAM)
-        # Przypisz gniazdo do określonego portu
+        # Bind socket to port
         server_socket.bind(('localhost', port_number))
-        # Nasłuchuj przychodzących połączeń
+        # Listen for incoming connections, max 5
         server_socket.listen(5)
 
-        # Wydrukuj status działania serwera
-        print(f"Serwer działa na porcie {port_number}.")
+        print(f"Server is running on a port: {port_number}.")
 
-        # Zaakceptuj przychodzące połączenia
+        # Accept incoming connections
         while True:
-            # Zaakceptuj nowe połączenie klienta
+            # Accept connection with the client
             client_socket, client_address = server_socket.accept()
-            print(f"Nawiązano połączenie z: {client_address[0]}")
+            print(f"Connected with: {client_address[0]}")
 
-            # Odbieraj i przetwarzaj polecenia od klienta
+            # Communication with client
             while True:
-                # Odbierz polecenie od klienta
-                command = client_socket.recv(1024).decode()
-                print(f"Otrzymano polecenie od {client_address[0]}: {command}")
-                # Zapisz otrzymane polecenie do pliku dziennika
+                # Receive command from client, number of bytes - 1000, then translate to a string
+                command_from_client = client_socket.recv(1000).decode()
+                print(f" Received command from: {client_address[0]}: {command_from_client}")
+                # Save info to log file:
                 log_file.write(
-                    f"Otrzymano polecenie od {client_address[0]}: {command}\n")
-                # Sprawdź, czy klient chce się rozłączyć
-                if command.strip() == "exit":
+                    f"Receive command from: {client_address[0]}: {command_from_client}\n")
+                # Check if client wants to quit the connection
+                if command_from_client == "exit":
                     print(
-                        f"Klient {client_address[0]} poprosił o rozłączenie.")
-                    # Wyślij wiadomość o rozłączeniu do klienta
+                        f"Client {client_address[0]} ended the connection.")
+                    # Send info to the client
                     client_socket.sendall(
-                        "Rozłączanie z serwerem.".encode())
-                    # Zapisz wiadomość o rozłączeniu do pliku dziennika
+                        "Disconnected with the server.".encode())
+                    # Save info to log file:
                     log_file.write(
-                        f"Klient {client_address[0]} poprosił o rozłączenie.\n")
-                    # Zamknij gniazdo klienta
+                        f"Client {client_address[0]} ended the connection.\n")
+                    # Close  client socket
                     client_socket.close()
                     break
                 else:
-                    # Wyślij odpowiedź do klienta
-                    client_socket.sendall(f"Wprowadziłeś: {command}".encode())
-                    # Zapisz odpowiedź do pliku dziennika
+                    # Send info to the client
+                    client_socket.sendall(f"I'm a parrot, You have said: {command_from_client}".encode())
+                    # Save info to log file:
                     log_file.write(
-                        f"Odpowiedź wysłana do {client_address[0]}: Wprowadziłeś: {command}\n")
+                        f"Message has been sent to the: {client_address[0]}: You have wrote: {command_from_client}\n")
 
-
+# if run this script as a main file (not a on of the module) then...
 if __name__ == "__main__":
-    # Pobierz numer portu od użytkownika
-    port_number = int(input("Podaj numer portu: "))
-    # Uruchom serwer
+    # Ask for port
+    port_number = int(input("Select port number: "))
+    # Run server
     ssh_server(port_number)
