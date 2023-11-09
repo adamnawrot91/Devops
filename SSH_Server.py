@@ -3,6 +3,17 @@ from socket import socket, AF_INET, SOCK_STREAM
 
 # SSH Server function
 def ssh_server(port_number):
+
+
+    '''
+            # Open the file and read the credentials
+        with open("access.txt", "r") as access_file:
+            username, password = access_file.read().splitlines()
+            
+            #Still missing auth info inside "talking with server part"
+    '''
+
+
     # Create log file
     with open("server_log.txt", "a") as log_file:
         # Create socket

@@ -251,3 +251,29 @@ Otrzymano polecenie od 127.0.0.1: SSH-2.0-libssh2_1.9.0_DEV
 
 Odpowiedź wysłana do 127.0.0.1: Wprowadziłeś: SSH-2.0-libssh2_1.9.0_DEV
 
+Receive command from: 127.0.0.1: SSH-2.0-libssh2_1.9.0_DEV
+
+Message has been sent to the: 127.0.0.1: You have wrote: SSH-2.0-libssh2_1.9.0_DEV
+
+Receive command from: 127.0.0.1: adam
+
+Message has been sent to the: 127.0.0.1: You have wrote: adam
+
+Receive command from: 127.0.0.1: adam
+
+Message has been sent to the: 127.0.0.1: You have wrote: adam
+
+Receive command from: 127.0.0.1: asdasd
+
+Message has been sent to the: 127.0.0.1: You have wrote: asdasd
+
+Receive command from: 127.0.0.1: asdasd
+
+Message has been sent to the: 127.0.0.1: You have wrote: asdasd
+
+Receive command from: 127.0.0.1: asdasd
+
+Message has been sent to the: 127.0.0.1: You have wrote: asdasd
+
+Receive command from: 127.0.0.1: 
+Message has been sent to the: 127.0.0.1: You have wrote: 
